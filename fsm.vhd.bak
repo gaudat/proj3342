@@ -1,0 +1,49 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+
+entity fsm is
+port( reset: in std_logic;
+		ignition_sw: in std_logic;
+		driver_door: in std_logic;
+		passenger_door: in std_logic;
+		
+		clk27: in std_logic;
+		
+		tp_param_sel: out std_logic_vector(1 downto 0);
+		pt_load_timer: out std_logic;
+		pt_start_timer: out std_logic;
+		pt_expired: in std_logic;
+		
+		led_blink: out std_logic;
+		led_light: out std_logic;
+		
+		sr_run: out std_logic);
+end fsm;
+
+architecture a of fsm is
+type STATES is (ARMED,DISARMED,PD_OPEN,DD_OPEN,ALARM,ALARM_WAIT);
+signal state: STATES;
+begin
+process(all) begin
+	if (reset = '1') then
+		state <= ARMED;
+		tp_param_sel <= "00";
+		pt_load_timer <= '0';
+		pt_start_timer <= '0';
+		led_blink <= '0';
+		led_light <= '0';
+		sr_run <= '0';
+	elsif rising_edge(clk27) then
+		case state is
+			when ARMED =>
+				led_blink <= '1';
+				if (driver_door = '1') then
+					tp_param_sel <= "01";
+					pt_load_timer <= '1';
+					state <= DD_OPEN;
+				elsif (passenger_door = '1') then
+					state <= PD_OPEN;
+					
+
+end architecture a;

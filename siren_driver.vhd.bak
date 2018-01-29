@@ -1,0 +1,21 @@
+-- MCLK 24.576 MHz
+-- DSP, 2nd rising edge
+
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+
+entity siren_driver is
+port (
+	reset: in std_logic;
+	mclk: out std_logic; -- Always on
+	bclk: out std_logic; -- Gated and synched to lr
+	daclrc: out std_logic;
+	dacdat: out std_logic;
+)
+end siren_driver;
+
+architecture a of siren_driver is
+begin
+
+end architecture a;

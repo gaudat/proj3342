@@ -1,0 +1,26 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+
+entity time_param is
+	port(
+	PPS: out std_logic;
+	CLOCK_27: in std_logic);
+end time_param;
+
+architecture a of time_param is
+	signal one_second: std_logic := '1';
+begin
+	process(CLOCK_27,one_second) 
+		variable count: integer range 0 to (2**30)-1 := 0; -- Should be enough
+	begin
+		if rising_edge(CLOCK_27) then
+			count := count + 1;
+		end if;
+		if count = 27000000 then
+			count := 0;
+			one_second <= not one_second;
+		end if;
+	end process;
+	PPS <= one_second;
+end architecture a;

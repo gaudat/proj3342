@@ -1,0 +1,665 @@
+Analysis & Synthesis report for proj3342
+Fri Dec 02 01:57:55 2016
+Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. State Machine - |proj3342|fsm:SM|state
+  9. State Machine - |proj3342|siren_driver:DACDRV|state
+ 10. State Machine - |proj3342|audio_codec_initial:DACCMD|state
+ 11. User-Specified and Inferred Latches
+ 12. Logic Cells Representing Combinational Loops
+ 13. Registers Removed During Synthesis
+ 14. General Register Statistics
+ 15. Inverted Register Statistics
+ 16. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 17. Parameter Settings for User Entity Instance: debounce:DB_key0
+ 18. Parameter Settings for User Entity Instance: debounce:DB_key1
+ 19. Parameter Settings for User Entity Instance: debounce:DB_key2
+ 20. Parameter Settings for User Entity Instance: debounce:DB_key3
+ 21. Parameter Settings for User Entity Instance: debounce:DB_ignition
+ 22. Parameter Settings for User Entity Instance: debounce:DB_reprog
+ 23. Port Connectivity Checks: "audio_codec_initial:DACCMD"
+ 24. Port Connectivity Checks: "prog_timer:PT"
+ 25. Elapsed Time Per Partition
+ 26. Analysis & Synthesis Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2013 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++--------------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                         ;
++------------------------------------+-------------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Fri Dec 02 01:57:55 2016           ;
+; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
+; Revision Name                      ; proj3342                                        ;
+; Top-level Entity Name              ; proj3342                                        ;
+; Family                             ; Cyclone II                                      ;
+; Total logic elements               ; 900                                             ;
+;     Total combinational functions  ; 876                                             ;
+;     Dedicated logic registers      ; 345                                             ;
+; Total registers                    ; 345                                             ;
+; Total pins                         ; 89                                              ;
+; Total virtual pins                 ; 0                                               ;
+; Total memory bits                  ; 0                                               ;
+; Embedded Multiplier 9-bit elements ; 0                                               ;
+; Total PLLs                         ; 0                                               ;
++------------------------------------+-------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                        ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                                     ; Setting            ; Default Value      ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                                     ; EP2C20F484C7       ;                    ;
+; Top-level entity name                                                      ; proj3342           ; proj3342           ;
+; Family name                                                                ; Cyclone II         ; Cyclone IV GX      ;
+; Use smart compilation                                                      ; Off                ; Off                ;
+; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                                ; Off                ; Off                ;
+; Restructure Multiplexers                                                   ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                                        ; Off                ; Off                ;
+; Preserve fewer node names                                                  ; On                 ; On                 ;
+; Disable OpenCore Plus hardware evaluation                                  ; Off                ; Off                ;
+; Verilog Version                                                            ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                               ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                                   ; Auto               ; Auto               ;
+; Safe State Machine                                                         ; Off                ; Off                ;
+; Extract Verilog State Machines                                             ; On                 ; On                 ;
+; Extract VHDL State Machines                                                ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                          ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                                 ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                             ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                                    ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                                  ; On                 ; On                 ;
+; Parallel Synthesis                                                         ; On                 ; On                 ;
+; DSP Block Balancing                                                        ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                                         ; On                 ; On                 ;
+; Power-Up Don't Care                                                        ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                               ; Off                ; Off                ;
+; Remove Duplicate Registers                                                 ; On                 ; On                 ;
+; Ignore CARRY Buffers                                                       ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                                     ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                                      ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                                  ; Off                ; Off                ;
+; Ignore LCELL Buffers                                                       ; Off                ; Off                ;
+; Ignore SOFT Buffers                                                        ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                             ; Off                ; Off                ;
+; Optimization Technique                                                     ; Balanced           ; Balanced           ;
+; Carry Chain Length                                                         ; 70                 ; 70                 ;
+; Auto Carry Chains                                                          ; On                 ; On                 ;
+; Auto Open-Drain Pins                                                       ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                                      ; Off                ; Off                ;
+; Auto ROM Replacement                                                       ; On                 ; On                 ;
+; Auto RAM Replacement                                                       ; On                 ; On                 ;
+; Auto Shift Register Replacement                                            ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                            ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                              ; On                 ; On                 ;
+; Strict RAM Replacement                                                     ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                          ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                                     ; Off                ; Off                ;
+; Auto RAM to Logic Cell Conversion                                          ; Off                ; Off                ;
+; Auto Resource Sharing                                                      ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                              ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing                        ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                          ; Off                ; Off                ;
+; Timing-Driven Synthesis                                                    ; Off                ; Off                ;
+; Report Parameter Settings                                                  ; On                 ; On                 ;
+; Report Source Assignments                                                  ; On                 ; On                 ;
+; Report Connectivity Checks                                                 ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                         ; Off                ; Off                ;
+; Synchronization Register Chain Length                                      ; 2                  ; 2                  ;
+; PowerPlay Power Optimization                                               ; Normal compilation ; Normal compilation ;
+; HDL message level                                                          ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                            ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report                   ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report                         ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report                  ; 100                ; 100                ;
+; Clock MUX Protection                                                       ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                                ; Off                ; Off                ;
+; Block Design Naming                                                        ; Auto               ; Auto               ;
+; SDC constraint protection                                                  ; Off                ; Off                ;
+; Synthesis Effort                                                           ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal               ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                                       ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                                         ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                                ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                                     ; On                 ; On                 ;
+; Synthesis Seed                                                             ; 1                  ; 1                  ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+
+
+Parallel compilation was disabled, but you have multiple processors available. Enable parallel compilation to reduce compilation time.
++-------------------------------------+
+; Parallel Compilation                ;
++----------------------------+--------+
+; Processors                 ; Number ;
++----------------------------+--------+
+; Number detected on machine ; 12     ;
+; Maximum allowed            ; 1      ;
++----------------------------+--------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                  ;
++----------------------------------+-----------------+-----------------+--------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type       ; File Name with Absolute Path                           ; Library ;
++----------------------------------+-----------------+-----------------+--------------------------------------------------------+---------+
+; proj3342.vhd                     ; yes             ; User VHDL File  ; C:/Users/anon/Desktop/proj3342/proj3342.vhd            ;         ;
+; debouncer.vhd                    ; yes             ; User VHDL File  ; C:/Users/anon/Desktop/proj3342/debouncer.vhd           ;         ;
+; 1s_clock.vhd                     ; yes             ; User VHDL File  ; C:/Users/anon/Desktop/proj3342/1s_clock.vhd            ;         ;
+; time_param.vhd                   ; yes             ; User VHDL File  ; C:/Users/anon/Desktop/proj3342/time_param.vhd          ;         ;
+; prog_timer.vhd                   ; yes             ; User VHDL File  ; C:/Users/anon/Desktop/proj3342/prog_timer.vhd          ;         ;
+; fuel_pump_logic.vhd              ; yes             ; User VHDL File  ; C:/Users/anon/Desktop/proj3342/fuel_pump_logic.vhd     ;         ;
+; audio_codec_initial.vhd          ; yes             ; User VHDL File  ; C:/Users/anon/Desktop/proj3342/audio_codec_initial.vhd ;         ;
+; siren_driver.vhd                 ; yes             ; User VHDL File  ; C:/Users/anon/Desktop/proj3342/siren_driver.vhd        ;         ;
+; blinker.vhd                      ; yes             ; User VHDL File  ; C:/Users/anon/Desktop/proj3342/blinker.vhd             ;         ;
+; fsm.vhd                          ; yes             ; User VHDL File  ; C:/Users/anon/Desktop/proj3342/fsm.vhd                 ;         ;
++----------------------------------+-----------------+-----------------+--------------------------------------------------------+---------+
+
+
++-----------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary               ;
++---------------------------------------------+-------------+
+; Resource                                    ; Usage       ;
++---------------------------------------------+-------------+
+; Estimated Total logic elements              ; 900         ;
+;                                             ;             ;
+; Total combinational functions               ; 876         ;
+; Logic element usage by number of LUT inputs ;             ;
+;     -- 4 input functions                    ; 462         ;
+;     -- 3 input functions                    ; 100         ;
+;     -- <=2 input functions                  ; 314         ;
+;                                             ;             ;
+; Logic elements by mode                      ;             ;
+;     -- normal mode                          ; 625         ;
+;     -- arithmetic mode                      ; 251         ;
+;                                             ;             ;
+; Total registers                             ; 345         ;
+;     -- Dedicated logic registers            ; 345         ;
+;     -- I/O registers                        ; 0           ;
+;                                             ;             ;
+; I/O pins                                    ; 89          ;
+; Embedded Multiplier 9-bit elements          ; 0           ;
+; Maximum fan-out node                        ; CLOCK_27[0] ;
+; Maximum fan-out                             ; 202         ;
+; Total fan-out                               ; 3748        ;
+; Average fan-out                             ; 2.86        ;
++---------------------------------------------+-------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                               ;
++---------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------+--------------+
+; Compilation Hierarchy Node      ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                  ; Library Name ;
++---------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------+--------------+
+; |proj3342                       ; 876 (5)           ; 345 (6)      ; 0           ; 0            ; 0       ; 0         ; 89   ; 0            ; |proj3342                            ; work         ;
+;    |audio_codec_initial:DACCMD| ; 147 (147)         ; 80 (80)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |proj3342|audio_codec_initial:DACCMD ; work         ;
+;    |blinker:BLINK|              ; 4 (4)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |proj3342|blinker:BLINK              ; work         ;
+;    |debounce:DB_ignition|       ; 41 (41)           ; 22 (22)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |proj3342|debounce:DB_ignition       ; work         ;
+;    |debounce:DB_key0|           ; 41 (41)           ; 22 (22)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |proj3342|debounce:DB_key0           ; work         ;
+;    |debounce:DB_key1|           ; 41 (41)           ; 22 (22)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |proj3342|debounce:DB_key1           ; work         ;
+;    |debounce:DB_key2|           ; 41 (41)           ; 22 (22)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |proj3342|debounce:DB_key2           ; work         ;
+;    |debounce:DB_key3|           ; 41 (41)           ; 22 (22)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |proj3342|debounce:DB_key3           ; work         ;
+;    |debounce:DB_reprog|         ; 41 (41)           ; 22 (22)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |proj3342|debounce:DB_reprog         ; work         ;
+;    |fsm:SM|                     ; 35 (35)           ; 13 (13)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |proj3342|fsm:SM                     ; work         ;
+;    |fuel_pump_logic:FPL|        ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |proj3342|fuel_pump_logic:FPL        ; work         ;
+;    |one_second_clock:CLK|       ; 42 (42)           ; 30 (30)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |proj3342|one_second_clock:CLK       ; work         ;
+;    |prog_timer:PT|              ; 22 (22)           ; 4 (4)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |proj3342|prog_timer:PT              ; work         ;
+;    |siren_driver:DACDRV|        ; 352 (352)         ; 62 (62)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |proj3342|siren_driver:DACDRV        ; work         ;
+;    |time_param:TP|              ; 21 (21)           ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |proj3342|time_param:TP              ; work         ;
++---------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
+Encoding Type:  One-Hot
++--------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |proj3342|fsm:SM|state                                                                                   ;
++---------------------+------------------+-------------+--------------+---------------------+----------------+-------------+
+; Name                ; state.ALARM_WAIT ; state.ALARM ; state.D_OPEN ; state.DISARMED_WAIT ; state.DISARMED ; state.ARMED ;
++---------------------+------------------+-------------+--------------+---------------------+----------------+-------------+
+; state.ARMED         ; 0                ; 0           ; 0            ; 0                   ; 0              ; 0           ;
+; state.DISARMED      ; 0                ; 0           ; 0            ; 0                   ; 1              ; 1           ;
+; state.DISARMED_WAIT ; 0                ; 0           ; 0            ; 1                   ; 0              ; 1           ;
+; state.D_OPEN        ; 0                ; 0           ; 1            ; 0                   ; 0              ; 1           ;
+; state.ALARM         ; 0                ; 1           ; 0            ; 0                   ; 0              ; 1           ;
+; state.ALARM_WAIT    ; 1                ; 0           ; 0            ; 0                   ; 0              ; 1           ;
++---------------------+------------------+-------------+--------------+---------------------+----------------+-------------+
+
+
+Encoding Type:  One-Hot
++----------------------------------------------------------------------------------+
+; State Machine - |proj3342|siren_driver:DACDRV|state                              ;
++----------------+----------------+----------------+----------------+--------------+
+; Name           ; state.s_push_R ; state.s_push_L ; state.s_Up_LRC ; state.s_Wait ;
++----------------+----------------+----------------+----------------+--------------+
+; state.s_Wait   ; 0              ; 0              ; 0              ; 0            ;
+; state.s_Up_LRC ; 0              ; 0              ; 1              ; 1            ;
+; state.s_push_L ; 0              ; 1              ; 0              ; 1            ;
+; state.s_push_R ; 1              ; 0              ; 0              ; 1            ;
++----------------+----------------+----------------+----------------+--------------+
+
+
+Encoding Type:  One-Hot
++-----------------------------------------------------------------------------------------------+
+; State Machine - |proj3342|audio_codec_initial:DACCMD|state                                    ;
++---------------+---------------+---------------+---------------+---------------+---------------+
+; Name          ; state.state_4 ; state.state_3 ; state.state_2 ; state.state_1 ; state.state_0 ;
++---------------+---------------+---------------+---------------+---------------+---------------+
+; state.state_0 ; 0             ; 0             ; 0             ; 0             ; 0             ;
+; state.state_1 ; 0             ; 0             ; 0             ; 1             ; 1             ;
+; state.state_2 ; 0             ; 0             ; 1             ; 0             ; 1             ;
+; state.state_3 ; 0             ; 1             ; 0             ; 0             ; 1             ;
+; state.state_4 ; 1             ; 0             ; 0             ; 0             ; 1             ;
++---------------+---------------+---------------+---------------+---------------+---------------+
+
+
++---------------------------------------------------------------------------------------------------+
+; User-Specified and Inferred Latches                                                               ;
++----------------------------------------------------+---------------------+------------------------+
+; Latch Name                                         ; Latch Enable Signal ; Free of Timing Hazards ;
++----------------------------------------------------+---------------------+------------------------+
+; one_second_clock:CLK|one_second                    ; GND                 ; yes                    ;
+; Number of user-specified and inferred latches = 1  ;                     ;                        ;
++----------------------------------------------------+---------------------+------------------------+
+Note: All latches listed above may not be present at the end of synthesis due to various synthesis optimizations.
+
+
++------------------------------------------------------------+
+; Logic Cells Representing Combinational Loops               ;
++--------------------------------------------------------+---+
+; Logic Cell Name                                        ;   ;
++--------------------------------------------------------+---+
+; fuel_pump_logic:FPL|fuel_pump_power                    ;   ;
+; Number of logic cells representing combinational loops ; 1 ;
++--------------------------------------------------------+---+
+Note: All cells listed above may not be present at the end of synthesis due to various synthesis optimizations.
+
+
++----------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                                 ;
++--------------------------------------------------+-------------------------------------------------+
+; Register name                                    ; Reason for Removal                              ;
++--------------------------------------------------+-------------------------------------------------+
+; audio_codec_initial:DACCMD|slave[0]~en           ; Stuck at GND due to stuck port data_in          ;
+; audio_codec_initial:DACCMD|slave[9]~en           ; Stuck at GND due to stuck port data_in          ;
+; audio_codec_initial:DACCMD|slave[18]~en          ; Stuck at GND due to stuck port data_in          ;
+; audio_codec_initial:DACCMD|slave[25,26]          ; Stuck at GND due to stuck port data_in          ;
+; audio_codec_initial:DACCMD|slave[23,24]          ; Stuck at VCC due to stuck port data_in          ;
+; audio_codec_initial:DACCMD|slave[22]             ; Stuck at GND due to stuck port data_in          ;
+; audio_codec_initial:DACCMD|slave[21]             ; Stuck at VCC due to stuck port data_in          ;
+; audio_codec_initial:DACCMD|slave[8,15..17,19,20] ; Stuck at GND due to stuck port data_in          ;
+; audio_codec_initial:DACCMD|slave[7]              ; Merged with audio_codec_initial:DACCMD|slave[4] ;
+; audio_codec_initial:DACCMD|slave[5]              ; Merged with audio_codec_initial:DACCMD|slave[2] ;
+; audio_codec_initial:DACCMD|slave[0,9,18]         ; Stuck at GND due to stuck port data_in          ;
+; siren_driver:DACDRV|\process_1:divider[11]       ; Stuck at GND due to stuck port data_in          ;
+; Total Number of Removed Registers = 21           ;                                                 ;
++--------------------------------------------------+-------------------------------------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 345   ;
+; Number of registers using Synchronous Clear  ; 32    ;
+; Number of registers using Synchronous Load   ; 5     ;
+; Number of registers using Asynchronous Clear ; 150   ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 101   ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++---------------------------------------------------+
+; Inverted Register Statistics                      ;
++-----------------------------------------+---------+
+; Inverted Register                       ; Fan out ;
++-----------------------------------------+---------+
+; time_param:TP|passenger_delay[3]        ; 1       ;
+; time_param:TP|driver_delay[3]           ; 1       ;
+; time_param:TP|alarm_on[3]               ; 1       ;
+; time_param:TP|passenger_delay[2]        ; 1       ;
+; time_param:TP|arm_delay[2]              ; 1       ;
+; time_param:TP|passenger_delay[0]        ; 1       ;
+; time_param:TP|passenger_delay[1]        ; 1       ;
+; time_param:TP|arm_delay[1]              ; 1       ;
+; time_param:TP|alarm_on[1]               ; 1       ;
+; audio_codec_initial:DACCMD|clock        ; 59      ;
+; audio_codec_initial:DACCMD|index[1]     ; 9       ;
+; audio_codec_initial:DACCMD|index[3]     ; 4       ;
+; audio_codec_initial:DACCMD|index[4]     ; 2       ;
+; audio_codec_initial:DACCMD|step[0]      ; 14      ;
+; Total number of inverted registers = 14 ;         ;
++-----------------------------------------+---------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                     ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                           ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------+
+; 3:1                ; 18 bits   ; 36 LEs        ; 18 LEs               ; 18 LEs                 ; Yes        ; |proj3342|debounce:DB_key2|counter_out[16]           ;
+; 3:1                ; 18 bits   ; 36 LEs        ; 18 LEs               ; 18 LEs                 ; Yes        ; |proj3342|debounce:DB_key3|counter_out[15]           ;
+; 3:1                ; 18 bits   ; 36 LEs        ; 18 LEs               ; 18 LEs                 ; Yes        ; |proj3342|debounce:DB_key0|counter_out[4]            ;
+; 3:1                ; 18 bits   ; 36 LEs        ; 18 LEs               ; 18 LEs                 ; Yes        ; |proj3342|debounce:DB_key1|counter_out[11]           ;
+; 3:1                ; 18 bits   ; 36 LEs        ; 18 LEs               ; 18 LEs                 ; Yes        ; |proj3342|debounce:DB_ignition|counter_out[11]       ;
+; 3:1                ; 18 bits   ; 36 LEs        ; 18 LEs               ; 18 LEs                 ; Yes        ; |proj3342|debounce:DB_reprog|counter_out[7]          ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |proj3342|siren_driver:DACDRV|cur_sample[2]          ;
+; 6:1                ; 14 bits   ; 56 LEs        ; 42 LEs               ; 14 LEs                 ; Yes        ; |proj3342|siren_driver:DACDRV|o_sample[14]           ;
+; 9:1                ; 2 bits    ; 12 LEs        ; 4 LEs                ; 8 LEs                  ; Yes        ; |proj3342|fsm:SM|tp_param_sel[0]                     ;
+; 11:1               ; 32 bits   ; 224 LEs       ; 32 LEs               ; 192 LEs                ; Yes        ; |proj3342|audio_codec_initial:DACCMD|clock_count[19] ;
+; 6:1                ; 3 bits    ; 12 LEs        ; 3 LEs                ; 9 LEs                  ; Yes        ; |proj3342|audio_codec_initial:DACCMD|index[3]        ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |proj3342|time_param:TP|interval_value[2]            ;
+; 3:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |proj3342|siren_driver:DACDRV|sine_add               ;
+; 3:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; No         ; |proj3342|siren_driver:DACDRV|sine_add               ;
+; 4:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |proj3342|audio_codec_initial:DACCMD|index           ;
+; 5:1                ; 2 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |proj3342|audio_codec_initial:DACCMD|state           ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; No         ; |proj3342|siren_driver:DACDRV|state.s_push_L         ;
+; 8:1                ; 2 bits    ; 10 LEs        ; 4 LEs                ; 6 LEs                  ; No         ; |proj3342|siren_driver:DACDRV|state.s_push_R         ;
+; 11:1               ; 4 bits    ; 28 LEs        ; 16 LEs               ; 12 LEs                 ; No         ; |proj3342|fsm:SM|Selector6                           ;
+; 14:1               ; 2 bits    ; 18 LEs        ; 8 LEs                ; 10 LEs                 ; No         ; |proj3342|fsm:SM|Selector4                           ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------+
+
+
++---------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: debounce:DB_key0 ;
++----------------+-------+--------------------------------------+
+; Parameter Name ; Value ; Type                                 ;
++----------------+-------+--------------------------------------+
+; counter_size   ; 18    ; Signed Integer                       ;
++----------------+-------+--------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: debounce:DB_key1 ;
++----------------+-------+--------------------------------------+
+; Parameter Name ; Value ; Type                                 ;
++----------------+-------+--------------------------------------+
+; counter_size   ; 18    ; Signed Integer                       ;
++----------------+-------+--------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: debounce:DB_key2 ;
++----------------+-------+--------------------------------------+
+; Parameter Name ; Value ; Type                                 ;
++----------------+-------+--------------------------------------+
+; counter_size   ; 18    ; Signed Integer                       ;
++----------------+-------+--------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: debounce:DB_key3 ;
++----------------+-------+--------------------------------------+
+; Parameter Name ; Value ; Type                                 ;
++----------------+-------+--------------------------------------+
+; counter_size   ; 18    ; Signed Integer                       ;
++----------------+-------+--------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: debounce:DB_ignition ;
++----------------+-------+------------------------------------------+
+; Parameter Name ; Value ; Type                                     ;
++----------------+-------+------------------------------------------+
+; counter_size   ; 18    ; Signed Integer                           ;
++----------------+-------+------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: debounce:DB_reprog ;
++----------------+-------+----------------------------------------+
+; Parameter Name ; Value ; Type                                   ;
++----------------+-------+----------------------------------------+
+; counter_size   ; 18    ; Signed Integer                         ;
++----------------+-------+----------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "audio_codec_initial:DACCMD"                                                         ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+; Port ; Type   ; Severity ; Details                                                                             ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+; done ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "prog_timer:PT"                                                                            ;
++------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port       ; Type   ; Severity ; Details                                                                             ;
++------------+--------+----------+-------------------------------------------------------------------------------------+
+; dbg_output ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:03     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus II 64-Bit Analysis & Synthesis
+    Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
+    Info: Processing started: Fri Dec 02 01:57:50 2016
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off proj3342 -c proj3342
+Warning (20028): Parallel compilation is not licensed and has been disabled
+Info (12021): Found 2 design units, including 1 entities, in source file proj3342.vhd
+    Info (12022): Found design unit 1: proj3342-arch3342
+    Info (12023): Found entity 1: proj3342
+Info (12021): Found 2 design units, including 1 entities, in source file debouncer.vhd
+    Info (12022): Found design unit 1: debounce-logic
+    Info (12023): Found entity 1: debounce
+Info (12021): Found 2 design units, including 1 entities, in source file 1s_clock.vhd
+    Info (12022): Found design unit 1: one_second_clock-a
+    Info (12023): Found entity 1: one_second_clock
+Info (12021): Found 2 design units, including 1 entities, in source file time_param.vhd
+    Info (12022): Found design unit 1: time_param-a
+    Info (12023): Found entity 1: time_param
+Info (12021): Found 2 design units, including 1 entities, in source file prog_timer.vhd
+    Info (12022): Found design unit 1: prog_timer-a
+    Info (12023): Found entity 1: prog_timer
+Info (12021): Found 2 design units, including 1 entities, in source file fuel_pump_logic.vhd
+    Info (12022): Found design unit 1: fuel_pump_logic-a
+    Info (12023): Found entity 1: fuel_pump_logic
+Info (12021): Found 2 design units, including 1 entities, in source file audio_codec_initial.vhd
+    Info (12022): Found design unit 1: audio_codec_initial-behavior_audio_codec_initial
+    Info (12023): Found entity 1: audio_codec_initial
+Info (12021): Found 2 design units, including 1 entities, in source file siren_driver.vhd
+    Info (12022): Found design unit 1: siren_driver-a
+    Info (12023): Found entity 1: siren_driver
+Info (12021): Found 2 design units, including 1 entities, in source file blinker.vhd
+    Info (12022): Found design unit 1: blinker-a
+    Info (12023): Found entity 1: blinker
+Info (12021): Found 2 design units, including 1 entities, in source file fsm.vhd
+    Info (12022): Found design unit 1: fsm-a
+    Info (12023): Found entity 1: fsm
+Info (12127): Elaborating entity "proj3342" for the top level hierarchy
+Warning (10541): VHDL Signal Declaration warning at proj3342.vhd(13): used implicit default value for signal "GPIO_0" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10492): VHDL Process Statement warning at proj3342.vhd(185): signal "key2_d_Q" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at proj3342.vhd(185): signal "key2_d" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at proj3342.vhd(192): signal "key3_d_Q" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at proj3342.vhd(192): signal "key3_d" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10873): Using initial value X (don't care) for net "LEDR[7..3]" at proj3342.vhd(9)
+Warning (10873): Using initial value X (don't care) for net "LEDG[6]" at proj3342.vhd(10)
+Warning (10873): Using initial value X (don't care) for net "LEDG[4]" at proj3342.vhd(10)
+Info (12128): Elaborating entity "debounce" for hierarchy "debounce:DB_key0"
+Info (12128): Elaborating entity "one_second_clock" for hierarchy "one_second_clock:CLK"
+Warning (10631): VHDL Process Statement warning at 1s_clock.vhd(18): inferring latch(es) for signal or variable "one_second", which holds its previous value in one or more paths through the process
+Info (10041): Inferred latch for "one_second" at 1s_clock.vhd(18)
+Info (12128): Elaborating entity "fuel_pump_logic" for hierarchy "fuel_pump_logic:FPL"
+Info (12128): Elaborating entity "time_param" for hierarchy "time_param:TP"
+Info (10041): Inferred latch for "interval_value[0]" at time_param.vhd(42)
+Info (10041): Inferred latch for "interval_value[1]" at time_param.vhd(42)
+Info (10041): Inferred latch for "interval_value[2]" at time_param.vhd(42)
+Info (10041): Inferred latch for "interval_value[3]" at time_param.vhd(42)
+Info (12128): Elaborating entity "prog_timer" for hierarchy "prog_timer:PT"
+Warning (10036): Verilog HDL or VHDL warning at prog_timer.vhd(19): object "expired_int" assigned a value but never read
+Warning (10492): VHDL Process Statement warning at prog_timer.vhd(29): signal "time_in" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at prog_timer.vhd(30): signal "count" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Info (12128): Elaborating entity "audio_codec_initial" for hierarchy "audio_codec_initial:DACCMD"
+Info (12128): Elaborating entity "siren_driver" for hierarchy "siren_driver:DACDRV"
+Info (12128): Elaborating entity "blinker" for hierarchy "blinker:BLINK"
+Info (12128): Elaborating entity "fsm" for hierarchy "fsm:SM"
+Warning (13046): Tri-state node(s) do not directly drive top-level pin(s)
+    Warning (13049): Converted tri-state buffer "audio_codec_initial:DACCMD|slave[0]~0" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "audio_codec_initial:DACCMD|slave[9]~1" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "audio_codec_initial:DACCMD|slave[18]~2" feeding internal logic into a wire
+Warning (14026): LATCH primitive "time_param:TP|interval_value[0]" is permanently enabled
+Warning (14026): LATCH primitive "time_param:TP|interval_value[1]" is permanently enabled
+Warning (14026): LATCH primitive "time_param:TP|interval_value[2]" is permanently enabled
+Warning (14026): LATCH primitive "time_param:TP|interval_value[3]" is permanently enabled
+Warning (13034): The following nodes have both tri-state and non-tri-state drivers
+    Warning (13035): Inserted always-enabled tri-state buffer between "I2C_SCLK" and its non-tri-state driver.
+    Warning (13035): Inserted always-enabled tri-state buffer between "I2C_SDAT" and its non-tri-state driver.
+    Warning (13035): Inserted always-enabled tri-state buffer between "pps" and its non-tri-state driver.
+    Warning (13035): Inserted always-enabled tri-state buffer between "key2_d" and its non-tri-state driver.
+    Warning (13035): Inserted always-enabled tri-state buffer between "key3_d" and its non-tri-state driver.
+    Warning (13035): Inserted always-enabled tri-state buffer between "key2_d_Q" and its non-tri-state driver.
+    Warning (13035): Inserted always-enabled tri-state buffer between "key3_d_Q" and its non-tri-state driver.
+    Warning (13035): Inserted always-enabled tri-state buffer between "hidden_sw" and its non-tri-state driver.
+    Warning (13035): Inserted always-enabled tri-state buffer between "brake" and its non-tri-state driver.
+    Warning (13035): Inserted always-enabled tri-state buffer between "ignition" and its non-tri-state driver.
+    Warning (13035): Inserted always-enabled tri-state buffer between "reprogram" and its non-tri-state driver.
+    Warning (13035): Inserted always-enabled tri-state buffer between "door_driver" and its non-tri-state driver.
+    Warning (13035): Inserted always-enabled tri-state buffer between "door_passenger" and its non-tri-state driver.
+Info (13060): One or more bidirs are fed by always enabled tri-state buffers
+    Info (13061): Fan-out of permanently enabled tri-state buffer feeding bidir "pps" is moved to its source
+    Info (13061): Fan-out of permanently enabled tri-state buffer feeding bidir "key2_d" is moved to its source
+    Info (13061): Fan-out of permanently enabled tri-state buffer feeding bidir "key3_d" is moved to its source
+    Info (13061): Fan-out of permanently enabled tri-state buffer feeding bidir "key2_d_Q" is moved to its source
+    Info (13061): Fan-out of permanently enabled tri-state buffer feeding bidir "key3_d_Q" is moved to its source
+    Info (13061): Fan-out of permanently enabled tri-state buffer feeding bidir "hidden_sw" is moved to its source
+    Info (13061): Fan-out of permanently enabled tri-state buffer feeding bidir "brake" is moved to its source
+    Info (13061): Fan-out of permanently enabled tri-state buffer feeding bidir "ignition" is moved to its source
+    Info (13061): Fan-out of permanently enabled tri-state buffer feeding bidir "reprogram" is moved to its source
+    Info (13061): Fan-out of permanently enabled tri-state buffer feeding bidir "door_driver" is moved to its source
+    Info (13061): Fan-out of permanently enabled tri-state buffer feeding bidir "door_passenger" is moved to its source
+Info (13000): Registers with preset signals will power-up high
+Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
+Warning (13004): Presettable and clearable registers converted to equivalent circuits with latches. Registers power-up to an undefined state, and DEVCLRn places the registers in an undefined state.
+    Warning (13310): Register "prog_timer:PT|count[0]" is converted into an equivalent circuit using register "prog_timer:PT|count[0]~_emulated" and latch "prog_timer:PT|count[0]~1"
+    Warning (13310): Register "prog_timer:PT|count[3]" is converted into an equivalent circuit using register "prog_timer:PT|count[3]~_emulated" and latch "prog_timer:PT|count[3]~6"
+    Warning (13310): Register "prog_timer:PT|count[2]" is converted into an equivalent circuit using register "prog_timer:PT|count[2]~_emulated" and latch "prog_timer:PT|count[2]~11"
+    Warning (13310): Register "prog_timer:PT|count[1]" is converted into an equivalent circuit using register "prog_timer:PT|count[1]~_emulated" and latch "prog_timer:PT|count[1]~16"
+Warning (13009): TRI or OPNDRN buffers permanently enabled
+    Warning (13010): Node "I2C_SCLK~synth"
+    Warning (13010): Node "I2C_SDAT~synth"
+    Warning (13010): Node "pps~synth"
+    Warning (13010): Node "key2_d~synth"
+    Warning (13010): Node "key3_d~synth"
+    Warning (13010): Node "key2_d_Q~synth"
+    Warning (13010): Node "key3_d_Q~synth"
+    Warning (13010): Node "hidden_sw~synth"
+    Warning (13010): Node "brake~synth"
+    Warning (13010): Node "ignition~synth"
+    Warning (13010): Node "reprogram~synth"
+    Warning (13010): Node "door_driver~synth"
+    Warning (13010): Node "door_passenger~synth"
+Warning (13024): Output pins are stuck at VCC or GND
+    Warning (13410): Pin "LEDR[3]" is stuck at GND
+    Warning (13410): Pin "LEDR[4]" is stuck at GND
+    Warning (13410): Pin "LEDR[5]" is stuck at GND
+    Warning (13410): Pin "LEDR[6]" is stuck at GND
+    Warning (13410): Pin "LEDR[7]" is stuck at GND
+    Warning (13410): Pin "LEDG[4]" is stuck at GND
+    Warning (13410): Pin "LEDG[6]" is stuck at GND
+    Warning (13410): Pin "GPIO_0[0]" is stuck at GND
+    Warning (13410): Pin "GPIO_0[1]" is stuck at GND
+    Warning (13410): Pin "GPIO_0[2]" is stuck at GND
+    Warning (13410): Pin "GPIO_0[3]" is stuck at GND
+    Warning (13410): Pin "GPIO_0[4]" is stuck at GND
+    Warning (13410): Pin "GPIO_0[5]" is stuck at GND
+    Warning (13410): Pin "GPIO_0[6]" is stuck at GND
+    Warning (13410): Pin "GPIO_0[7]" is stuck at GND
+    Warning (13410): Pin "GPIO_0[8]" is stuck at GND
+    Warning (13410): Pin "GPIO_0[9]" is stuck at GND
+    Warning (13410): Pin "GPIO_0[10]" is stuck at GND
+    Warning (13410): Pin "GPIO_0[11]" is stuck at GND
+    Warning (13410): Pin "GPIO_0[12]" is stuck at GND
+    Warning (13410): Pin "GPIO_0[13]" is stuck at GND
+    Warning (13410): Pin "GPIO_0[14]" is stuck at GND
+    Warning (13410): Pin "GPIO_0[15]" is stuck at GND
+    Warning (13410): Pin "GPIO_0[16]" is stuck at GND
+    Warning (13410): Pin "GPIO_0[17]" is stuck at GND
+    Warning (13410): Pin "GPIO_0[18]" is stuck at GND
+    Warning (13410): Pin "GPIO_0[19]" is stuck at GND
+    Warning (13410): Pin "GPIO_0[20]" is stuck at GND
+    Warning (13410): Pin "GPIO_0[21]" is stuck at GND
+    Warning (13410): Pin "GPIO_0[22]" is stuck at GND
+    Warning (13410): Pin "GPIO_0[23]" is stuck at GND
+    Warning (13410): Pin "GPIO_0[24]" is stuck at GND
+    Warning (13410): Pin "GPIO_0[25]" is stuck at GND
+    Warning (13410): Pin "GPIO_0[26]" is stuck at GND
+    Warning (13410): Pin "GPIO_0[27]" is stuck at GND
+    Warning (13410): Pin "GPIO_0[28]" is stuck at GND
+    Warning (13410): Pin "GPIO_0[29]" is stuck at GND
+    Warning (13410): Pin "GPIO_0[30]" is stuck at GND
+    Warning (13410): Pin "GPIO_0[31]" is stuck at GND
+    Warning (13410): Pin "GPIO_0[32]" is stuck at GND
+    Warning (13410): Pin "GPIO_0[33]" is stuck at GND
+    Warning (13410): Pin "GPIO_0[34]" is stuck at GND
+    Warning (13410): Pin "GPIO_0[35]" is stuck at GND
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Warning (21074): Design contains 3 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "SW[6]"
+    Warning (15610): No output dependent on input pin "CLOCK_27[1]"
+    Warning (15610): No output dependent on input pin "CLOCK_24[1]"
+Info (21057): Implemented 995 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 18 input pins
+    Info (21059): Implemented 58 output pins
+    Info (21060): Implemented 13 bidirectional pins
+    Info (21061): Implemented 906 logic cells
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 102 warnings
+    Info: Peak virtual memory: 538 megabytes
+    Info: Processing ended: Fri Dec 02 01:57:55 2016
+    Info: Elapsed time: 00:00:05
+    Info: Total CPU time (on all processors): 00:00:05
+
+

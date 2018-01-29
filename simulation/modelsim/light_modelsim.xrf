@@ -1,0 +1,13 @@
+vendor_name = ModelSim
+source_file = 1, C:/Users/anon/Desktop/proj3342/light.vhd
+source_file = 1, C:/Users/anon/Desktop/proj3342/Waveform.vwf
+source_file = 1, C:/Users/anon/Desktop/proj3342/db/light.cbx.xml
+source_file = 1, c:/altera/13.0sp1/quartus/libraries/vhdl/ieee/prmtvs_b.vhd
+source_file = 1, c:/altera/13.0sp1/quartus/libraries/vhdl/ieee/prmtvs_p.vhd
+source_file = 1, c:/altera/13.0sp1/quartus/libraries/vhdl/ieee/timing_b.vhd
+source_file = 1, c:/altera/13.0sp1/quartus/libraries/vhdl/ieee/timing_p.vhd
+design_name = light
+instance = comp, \x1~I , x1, light, 1
+instance = comp, \x2~I , x2, light, 1
+instance = comp, \f~0 , f~0, light, 1
+instance = comp, \f~I , f, light, 1

@@ -1,0 +1,39 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+
+entity codec_i2c_driver is
+    port (reset: in std_logic; -- Init values
+            trig_200khz: in std_logic; -- I2C internal clock, real clock is 100kHz
+            i2c_sda: inout std_logic;
+            i2c_scl: inout std_logic
+            )
+end codec_i2c_driver;
+
+architecture a of codec_i2c_driver is
+    type STATES is (s_Init,s_Started);
+    signal state: STATES;
+    signal current_command_num: integer range 0 to 4 := 0;
+    signal current_command: std_logic_vector(26 downto 0);
+    signal current_bit: integer range -2 to 26 := -2;
+    constant CMD_RESET: std_logic_vector(26 downto 0) := "00110100Z00011110Z00000000Z"; -- Reset
+    constant CMD_DAC_EN: std_logic_vector(26 downto 0) := "00110100Z00001100Z00010111Z"; -- Enable DAC
+    constant CMD_DAC_SEL: std_logic_vector(26 downto 0) := "00110100Z00001000Z00100010Z"; -- Disable bypass, select DAC
+    constant CMD_ACTIVATE: std_logic_vector(26 downto 0) := "00110100Z00010010Z00000001Z"; -- Set active to 1
+    constant CMD_OUT_EN: std_logic_vector(26 downto 0) := "00110100Z00001100Z00000111Z" -- Enable line output
+begin
+    process(reset,trig_200khz) begin
+        if reset = 1 then
+            current_command_num <= 0;
+            state <= s_Init;
+            sda <= '1';
+            scl <= '1';
+        elsif rising_edge(trig_200khz) then
+            case state is
+                when s_Init => -- Start condition
+                    scl <= '0';
+                    sda <= '1';
+                    state <= s_Started;
+                when s_Started =>
+                    scl 
+end architecture a;

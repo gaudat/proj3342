@@ -1,0 +1,10 @@
+library IEEE;
+use std_logic_1164.all;
+use numeric_std.all;
+
+entity fuel_pump_logic is
+	port (ignition: in std_logic;
+			brake: in std_logic;
+			hidden_sw: in std_logic;
+			fuel_pump_power: out std_logic);
+end entity;

@@ -1,0 +1,3 @@
+library IEEE;
+using std_logic_1164.all;
+using numeric_std.all;

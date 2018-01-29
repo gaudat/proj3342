@@ -1,0 +1,117 @@
+------------------------------------------------------------------------------------
+--------reference Mr. Yang Ruifang's code, with significant simplifications---------
+-----------HKU ELEC2302  project: car sercurity system------------------------------
+---------all the code work were produced by Mr.Chen Yibo & Mr. Duan Jingyu---------- 
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+
+--Audio codec initialization through I2C.
+
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+ENTITY audio_codec_initial IS												--Definition of i2c_initialization component
+	PORT (
+		clock 	: IN STD_LOGIC; 											--Master clock
+		SDINin 	: INOUT STD_LOGIC; 										--Serial data on I2C
+		SCLKin 	: INOUT STD_LOGIC											--Serial clock on I2C bus
+		);                                   
+END audio_codec_initial;
+
+ARCHITECTURE behavior_audio_codec_initial OF audio_codec_initial IS		
+
+TYPE STATE_TYPE IS (state_0, state_1, state_2, state_3, state_4);					
+SIGNAL	state	: STATE_TYPE := state_0;								
+SIGNAL	step	: INTEGER RANGE 1 TO 9:= 1;							--9 messages to be sent
+SIGNAL	slave	: STD_LOGIC_VECTOR(26 DOWNTO 0);						--Instruction sent to slave						
+SIGNAL	clock_count	: INTEGER := 0;									--Used for counting clock cycles within a state, to better control the signal sequence
+SIGNAL	index	: INTEGER RANGE -1 TO 26 := 26;						--Have to send 27 bit of data per message 
+																					
+BEGIN
+	PROCESS(clock)
+	BEGIN
+		IF rising_edge(clock) THEN
+			CASE state IS
+				WHEN state_0 =>												--State0: Load instructions data to slave
+					SDINin <= '1';
+					SCLKin <= '1';										      --Set both SDIN and SCLK as 1
+					index <= 26;                                  
+					CASE step IS												--9 messages to initialize audio codec chip, will be transfered by I2C
+						WHEN 1 =>										
+							slave<="00110100Z00011110Z00000000Z";		--Reset codec chip
+						WHEN 2 =>
+							slave<="00110100Z00000001Z00010111Z";		--LINE-IN input; disable mute; 0 dB gain 
+						WHEN 3 =>
+							slave<="00110100Z00001110Z00010011Z";		--DSP mode; 16-bit data; MSB available on 2nd BCLK rising edge after DACLRC rising; slave mode
+						WHEN 4 =>
+							slave<="00110100Z00010000Z01001100Z";		--ADC/DAC at 8 kHz sampling rate; 256 x sampling frequency; Master clock MCLK at 2 x 12.288 MHz; core clock = MCLK / 2
+						WHEN 5 =>
+							slave<="00110100Z00000101Z01111111Z";		--Headphone maximum volume 
+						WHEN 6 =>
+							slave<="00110100Z00001000Z00010010Z";		--Analogue audio path control: microphone mute; select LINE-IN input; disable bypass mode; select DAC 
+						WHEN 7 =>
+							slave<="00110100Z00001010Z00000000Z";		--Digital audio path control: disable DAC mute; enable ADC high pass filter 
+						WHEN 8 =>
+							slave<="00110100Z00001100Z00000000Z";		--Disable power down 
+						WHEN 9 =>
+							slave<="00110100Z00010010Z00000001Z";		--Activate digital audio interface
+					END CASE;
+					state <= state_1;                           
+				WHEN state_1 =>												--State1: Start i2c bus
+						SDINin <= '0';              
+						state <= state_2;                            
+				WHEN state_2 =>												--Load instructions into SDIN
+					IF (index>-1) THEN										--Pull SCLK to '0'
+						IF (clock_count < 1) THEN							
+							SCLKin <= '0';                                 
+							state <= state_2;
+							clock_count <= clock_count + 1;
+						ELSIF (clock_count < 2) THEN						--When SCLK is '0', change SDAT
+								SDINin <= slave(index);
+								state <= state_2; 
+								clock_count <= clock_count + 1;
+						ELSE														--After SDAT is changed, pull up SCLK and read SDAT
+ 							SCLKin <= '1';                                 
+							state <= state_2;                               
+							index <= index-1;                            
+							clock_count <= 0;                          
+						END IF;
+					ELSE
+						index <= 26;                                 --After index reaches 0, all bits in one message are sent, so restore index
+						state <= state_3;                               
+						clock_count <= 0;
+					END IF;
+				WHEN state_3 =>												--State3: Stop i2c bus
+					IF (clock_count < 1) THEN								--Pull down SCLK
+						SCLKin <= '0';
+						state <= state_3;                        
+						clock_count <= clock_count + 1;
+					ELSIF (clock_count < 2) THEN							--Pull down SDAT
+						SDINin <= '0';                                           
+						state <= state_3;
+						clock_count <= clock_count + 1;
+					ELSIF (clock_count < 3) THEN							--Pull up SCLK
+						SCLKin <= '1';                                            
+						state <= state_3;
+						clock_count <= clock_count + 1;
+					ELSIF (clock_count < 4) THEN							--Pull up SDAT
+						SDINin <= '1';                                     
+						IF (step<9) THEN										--Check whether all 9 messages have been sent
+							step <= step + 1;
+							state <= state_0;
+							clock_count <= 0;								
+						ELSE													
+							state <= state_4;                        
+							clock_count <= 0;
+						END IF;
+					END IF;
+				WHEN state_4 =>												--Finish initialization
+					SCLKin <= '1';
+					SDINin <= '1';
+					state <= state_4;                              
+					clock_count <= 0;
+			END CASE;		
+		END IF;
+	END PROCESS;
+END behavior_audio_codec_initial;
